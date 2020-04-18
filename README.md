@@ -9,3 +9,5 @@ Einnig færð þú nýjustu fréttirnar í beinni frá stærstu fréttaveitum la
 Fleiri þjónustur eru á leiðinni, þ.m.t. verkefnalista (e. todo list) sem verður mun þægilegri en hefðbundnu tossalistar eins og þær fæst nú á app-markaðinum í dag.
 
 Athugið að síðan er ekki fullkláruð og er einungis í útgáfu 0.1 (e. v0.1) eins og er.
+
+![Screenshot_v0](/Screenshot_v0.png)
