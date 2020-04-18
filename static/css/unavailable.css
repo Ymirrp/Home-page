@@ -1,0 +1,23 @@
+*, body {
+    background-color: #031926;
+    color: #d4d5dd;
+    text-align: center;
+    padding: 2em;
+    letter-spacing: 0.1em;
+}
+
+h1 {
+    font-weight: 600;
+}
+
+p {
+    font-weight: 300;
+    margin-bottom: 4em;
+}
+
+button {
+    background-color: #d4d5dd;
+    border-radius: .5em;
+    color: #031926;
+    padding: 1em;
+}

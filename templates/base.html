@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/icons/favicon-16x16.png' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    {% block style %}{% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+    {% block script %}{% endblock %}
+    <title>{% block title %}Velkomin heim!{% endblock %}</title>
+</head>
+<body>
+    <nav id="navbar">
+        <span class="fas fa-bars nav-btns" id="menu-btn" title="Valmynd" onclick="expand_nav()">
+            <span class="menu-txt hidden">Valmynd</span>
+        </span>
+        <a class="fas fa-user-circle nav-btns" id="profile-btn" href="{% url 'profile-site' %}">
+            <span class="menu-txt hidden" title="Prófíll minn">Prófíll</span>
+        </a>
+        <a class="far fa-calendar-check nav-btns" id="todo-btn" href="{% url 'todo-site' %}">
+            <span class="menu-txt hidden" title="Verkefnin mín">Verkefni</span>
+        </a>
+        <a class="fas fa-sign-out-alt nav-btns" id="logout-btn"  href="{% url 'logout' %}">
+            <span class="menu-txt hidden" title="Skrá út">Útskrá</span>
+        </a>
+    </nav>
+{#    <aside style="display: none"></aside>#}
+    <main>
+{#        <div id="date-container">#}
+{#            <p id="date"></p>#}
+{#        </div>#}
+        {% block topsites %}{% endblock %}
+    </main>
+    <div id="news">
+        {% block news %}{% endblock %}
+    </div>
+{#    <p style="display: none">#}
+{#        Icons made by <a href="https://www.flaticon.com/authors/iconixar" title="iconixar">iconixar</a> from#}
+{#        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>#}
+{#    </p>#}
+</body>
+</html>

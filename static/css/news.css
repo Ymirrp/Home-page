@@ -1,0 +1,65 @@
+#news a, #news a:visited, #news a:hover {
+    color: #031926;
+}
+#news a:hover {
+    text-decoration: none;
+}
+
+#news-container {
+    height: 50%;
+    background-color: #acadbc;
+    /*margin: 12px;*/
+    /*width: 25%;*/
+    /*float: right;*/
+    /*display: block;*/
+    position: relative;
+}
+
+.news-block {
+    background-color: #acadbc;
+    /*border-top: 1px dotted white;*/
+    /*border-bottom: 1px dotted white;*/
+    box-shadow: -2px 2px 5px -4px azure;
+    margin: 4px;
+    height: 3.1em;
+    transition: background-color 300ms;
+}
+.news-block:hover {
+    background-color: #d4d5dd;
+}
+.news-block span, p {
+    background-color: rgba(0,0,0,0);
+    margin: 0 4px;
+}
+
+.headline {
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /*height: 2rem;*/
+    width: 90%;
+}
+.headline:hover {
+    text-decoration: underline;
+}
+
+.time {
+    /*font-style: italic;*/
+    font-size: 0.8em;
+}
+.time:hover {
+    text-decoration: none;
+    /*background-color: darkslateblue;*/
+}
+
+.site-img {
+    width: 3em;
+    height: 3em;
+    float: left;
+}
+.headline-wrapper {
+    background-color: rgba(0,0,0,0);
+    /*float:right;*/
+    margin-left: 3.25em;
+}

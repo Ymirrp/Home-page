@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/topsites-init.js' %}"></script>
+    <script src="{% static 'js/functions.js' %}"></script>
+{% endblock %}
+{% block topsites %}
+    <div id="date-container">
+        <p id="hello-name">Halló, {{ user }}</p>
+        <p id="date"></p>
+    </div>
+    <div id="topsites-container">
+        <div id="cat-banner">
+            {% for cat, full_cat in all_cats %}
+                {% if cat in categories %}
+                <div class="category" id="cat-{{ cat }}">
+                    <button class="btn" id="btn-{{ cat }}" title="{{ full_cat }}" onclick="openTab('{{ cat }}')">
+                        <img src="{% static '' %}img/categories/{{ cat }}.png">
+                        <span class="d-none">{{ full_cat }}</span>
+                    </button>
+                </div>
+                {% endif %}
+            {% endfor %}
+            <div class="category" id="cat-ADD">
+                <button class="btn" id="btn-ADD" title="Bæta við hlekk" onclick="openTab('ADD')">
+                    <img src="{% static 'img/plus.png' %}">
+                    <span class="d-none">Bæta við hlekk</span>
+                </button>
+            </div>
+        </div>
+
+        {% for cat, full_cat in all_cats %}
+            <div class="site-wrapper hidden" id="site-{{ cat }}">
+                <ul>
+                    {% for key, sites in sites.items %}
+                        {% for site in sites %}
+                            {% if site.category == cat %}
+                                <div class="single-site" id="sitid-{{ site.id }}">
+                                    <img src="{{ site.img }}" class="favicon">
+                                    <a href="{% url 'topsites-url' site.url %}" title="{{ site.url }}">
+                                        <li class="site-title">{{ site.name }}</li>
+                                    </a>
+                                    <span class="fas fa-pen edit" onclick="open_menu({{ site.id }})"></span>
+                                    <div class="menu" id="menu-{{ site.id }}">
+                                        <span class="fas fa-times menu-close" onclick="close_menu({{ site.id }})"></span>
+                                        <div class="menu-edit">
+                                            <span>Edit site</span>
+                                        </div>
+                                        <div class="menu-divider"></div>
+                                        <div class="menu-delete" onclick="confirm_del('{{ site.id }}')">
+                                            <span>Delete site</span>
+                                        </div>
+                                    </div>
+{#                                    <div class="editsite-container">#}
+{#                                        <form action="{% url 'edit-site' site.id %}" method="POST">#}
+{#                                            <input>#}
+{#                                        </form>#}
+{#                                    </div>#}
+{#                                    <div class="deletesite-confirmation" id="del-{{ site.id }}">#}
+{#                                        <form action="{% url 'del-site' site.id %}" method="POST">#}
+{#                                            {% csrf_token %}#}
+{#                                            <span>Ertu viss að þú viljir eyða þessa síðu?</span>#}
+{#                                            <input type="submit" value="Eyða">#}
+{#                                        </form>#}
+{#                                        <button onclick="close_del('{{ site.id }}')">Hætta við</button>#}
+{#                                    </div>#}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                    <div class="single-site"  onclick="add_site('{{ cat }}')">
+                        <img src="{% static 'img/plus.png' %}" class="favicon">
+{#                    <a href="{% url 'topsites-url' site.url %}" title="{{ site.url }}">#}
+                        <li id="li-a">Bæta við tengil</li>
+{#                    </a>#}
+                    </div>
+                </ul>
+            </div>
+        {% endfor %}
+        <div class="site-wrapper hidden" id="site-ADD">
+            <div id="addsite-container">
+                <form action="{% url 'add-site' %}" method="POST">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="site-name">Nafn vefsíðunnar: </label>
+                            </td>
+                            <td>
+                                {{ form.name }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="site-url">Slóð vefsíðunnar: *</label>
+                            </td>
+                            <td>
+                                {{ form.url }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="site-img">Mynd vefsíðunnar: </label>
+                            </td>
+                            <td>
+                                {{ form.img }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="site-cat">Flokkur vefsíðunnar</label>
+                            </td>
+                            <td>
+                                {{ form.categories }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <small>* - Ekki valkæmt. Þetta svæði þarf að vera útfyllt.</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input id="input-submit" class="inputs" type="submit" value="Bæta við">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="popup-form" id="addsite-popup">
+            <form action="{% url 'add-site' %}" method="POST">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>
+                            <label for="site-name">Nafn vefsíðunnar: </label>
+                        </td>
+                        <td>
+                            {{ form.name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="site-url">Slóð vefsíðunnar: *</label>
+                        </td>
+                        <td>
+                            {{ form.url }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="site-img">Mynd vefsíðunnar: </label>
+                        </td>
+                        <td>
+                            {{ form.img }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="site-cat">Flokkur vefsíðunnar</label>
+                        </td>
+                        <td>
+                            {{ form.categories }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <small>* - Ekki valkæmt. Þetta svæði þarf að vera útfyllt.</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="btn-close" class="inputs" onclick="close_form()">Hætta við</button>
+                        </td>
+                        <td>
+                            <input id="input-submit" class="inputs" type="submit" value="Bæta við">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div id="delete-container"></div>
+    <div id="snackbar"></div>
+{% endblock %}
+{% block news %}
+    <div id="news-container">
+        {% for entry in feeds %}
+            <a href="{{ entry.id }}">
+                <div class="news-block" id="news-block-{{ forloop.counter }}">
+    {#                <span>{{ entry.site }}:</span>#}
+                    {% if entry.site == "Visir" %}
+                        <img class="site-img" src="{% static 'img/visir_logo.png' %}">
+                    {% elif entry.site == 'Mbl' %}
+                        <img class="site-img" src="{% static 'img/mbl_logo.png' %}">
+                    {% elif entry.site == 'Ruv' %}
+                        <img class="site-img" src="{% static 'img/ruv_logo.png' %}">
+                    {% endif %}
+                    <div class="headline-wrapper" title="{{ entry.title }}">
+                        <p class="headline">{{ entry.title }}</p>
+        {#                <p>{{ entry.time }} {{ entry.published }}</p>#}
+                        <p class="time">{{ entry.time_passed }}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
