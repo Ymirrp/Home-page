@@ -1,10 +1,3 @@
-// document.getElementById('menu-btn').addEventListener('click', ev => {
-//     let navbar = document.getElementById('navbar');
-//     let btns = document.querySelector('nav-btns');
-//     let txts = document.getElementsByClassName('menu-txt');
-//
-//     navbar.style.width = "10em";
-// });
 
 function expand_nav() {
     let i;
