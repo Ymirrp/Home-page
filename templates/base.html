@@ -21,11 +21,15 @@
         <span class="fas fa-bars nav-btns" id="menu-btn" title="Valmynd" onclick="expand_nav()">
             <span class="menu-txt hidden">Valmynd</span>
         </span>
+        <hr id="divider">
         <a class="fas fa-user-circle nav-btns" id="profile-btn" href="{% url 'profile-site' %}">
             <span class="menu-txt hidden" title="Prófíll minn">Prófíll</span>
         </a>
-        <a class="far fa-calendar-check nav-btns" id="todo-btn" href="{% url 'todo-site' %}">
+        <a class="fas fa-tasks nav-btns" id="todo-btn" href="{% url 'todo-site' %}">
             <span class="menu-txt hidden" title="Verkefnin mín">Verkefni</span>
+        </a>
+        <a class="far fa-calendar-alt nav-btns" id="todo-btn" href="{% url 'calendar-site' %}">
+            <span class="menu-txt hidden" title="Dagatal">Dagatal</span>
         </a>
         <a class="fas fa-sign-out-alt nav-btns" id="logout-btn"  href="{% url 'logout' %}">
             <span class="menu-txt hidden" title="Skrá út">Útskrá</span>

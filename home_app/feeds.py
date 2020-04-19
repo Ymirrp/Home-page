@@ -51,29 +51,33 @@ def parse_date(site, entry):
     h = p[17:19]
     m = p[20:22]
     s = p[23:25]
-    t_str = '{}{}{}{}{}{}'.format(year, month, day, h, m, s)
-    entry['time'] = int(t_str)
-    today = datetime.today()
+    entry['time'] = '{}{}{}{}{}{}'.format(year, month, day, h, m, s)
+    today = datetime.now()
     then = datetime(int(year), int(month), int(day), int(h), int(m), int(s))
     entry['time_diff'] = today - then
-    if entry['time_diff'] < timedelta(minutes=1):
-        if int(entry['time_diff'].seconds) == 1:
-            entry['time_passed'] = str(int(entry['time_diff'].seconds)) + " sekúndu síðan"
+    time_diff = entry['time_diff']
+    time_diff_seconds = int(time_diff.total_seconds())
+    m, s = divmod(time_diff_seconds, 60)
+    h, m = divmod(m, 60)
+
+    if h > 23:
+        if h // 24 == 1:
+            entry['time_passed'] = str(h // 24) + " degi síðan"
         else:
-            entry['time_passed'] = str(int(entry['time_diff'].seconds)) + " sekúndum síðan"
-    elif entry['time_diff'] < timedelta(hours=1):
-        if int(entry['time_diff'].seconds / 60) == 1:
-            entry['time_passed'] = str(int(entry['time_diff'].seconds / 60)) + " mínutu síðan"
+            entry['time_passed'] = str(h // 24) + " dögum síðan"
+    elif h > 0:
+        if h == 1:
+            entry['time_passed'] = str(h) + " klukkutíma síðan"
         else:
-            entry['time_passed'] = str(int(entry['time_diff'].seconds / 60)) + " mínutum síðan"
-    elif entry['time_diff'] < timedelta(days=1):
-        if int(entry['time_diff'].seconds / 60**2) == 1:
-            entry['time_passed'] = str(int(entry['time_diff'].seconds / 60 ** 2)) + " klukkutíma síðan"
+            entry['time_passed'] = str(h) + " klukkutímum síðan"
+    elif m > 0:
+        if m == 1:
+            entry['time_passed'] = str(m) + " mínutu síðan"
         else:
-            entry['time_passed'] = str(int(entry['time_diff'].seconds / 60**2)) + " klukkutímum síðan"
+            entry['time_passed'] = str(m) + " mínutum síðan"
     else:
-        if int((entry['time_diff'].seconds / 60**2) / 24) == 1:
-            entry['time_passed'] = str(int((entry['time_diff'].seconds / 60**2) / 24)) + " degi síðan"
+        if s == 1:
+            entry['time_passed'] = str(s) + " sekúndu síðan"
         else:
-            entry['time_passed'] = str(int((entry['time_diff'].seconds / 60 ** 2) / 24)) + " dögum síðan"
+            entry['time_passed'] = str(s) + " sekúndum síðan"
     return entry

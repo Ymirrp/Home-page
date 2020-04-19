@@ -4,7 +4,6 @@ from django.forms import forms
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from news_app import views as n_views
 from .models import TopSites as TP
 from .forms import AddSiteForm, RegisterUserForm
 from .feeds import *

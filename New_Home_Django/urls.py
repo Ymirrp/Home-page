@@ -15,5 +15,6 @@ urlpatterns = [
     path('profile/', views.unavailable, name='profile-site'),
     # path('profile/', include('home_app.urls'), name='profile-urls'),
     path('todo/', views.unavailable, name='todo-site'),
+    path('calendar/', views.unavailable, name='calendar-site'),
     path('admin/', admin.site.urls),
 ]

@@ -26,6 +26,14 @@ body {
     width: 12em;
     /*text-align: left;*/
 }
+
+#divider {
+    border-color: #031926;
+    margin-top: .25em;
+    margin-bottom: .25em;
+    width: 75%;
+}
+
 #navbar a {
     color: inherit;
     text-decoration: none;
@@ -34,11 +42,15 @@ body {
 .menu-txt {
     background-color: transparent;
     display: inline-block;
-    /*float: right;*/
+    float: right;
     font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-    font-size: .75em;
+    font-size: .6em;
     font-weight: 300;
-    /*letter-spacing: .08em;*/
+    text-transform: uppercase;
+    padding-top: .3em;
+    /*text-align: right;*/
+    /*width: 50%;*/
+    letter-spacing: .05em;
     /*height: 2em;*/
     /*vertical-align: center;*/
     /*width: 50%;*/
@@ -60,15 +72,20 @@ body {
 }
 
 #logout-btn {
-    position: relative;
+    position: fixed;
+    /*width: initial;*/
+    /*width: 3.5em;*/
+    /*display: block;*/
     /*float: left;*/
-    margin-top: 69vh;
+    /*margin-top: 50vh;*/
     /*float: bottom;*/
     /*margin-left: .5em;*/
     /*margin: 0;*/
     bottom: 0;
 }
-
+#logout-btn span {
+    margin-left: 2.4em;
+}
 main {
     background-color: transparent;
     /*display: block;*/
