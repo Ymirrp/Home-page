@@ -165,8 +165,6 @@ function getCookie(name) {
 }
 
 function switch_cont() {
-    // document.getElementById("login-container").classList.toggle("hidden");
-    // document.getElementById("register-container").classList.toggle("hidden");
     let cont1 = document.getElementById("cont1");
     let cont2 = document.getElementById("cont2");
     cont1.classList.toggle("hidden");
@@ -181,6 +179,7 @@ function switch_cont() {
 
 // api: api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=c5d83ac177a5989b9d9ee9f886892237
 // apiKey: c5d83ac177a5989b9d9ee9f886892237
+
 // function getLocation() {
 //     function success(pos) {
 //         const lon = pos.coords.longitude;
@@ -196,24 +195,3 @@ function switch_cont() {
 //         navigator.geolocation.getCurrentPosition(success, error)
 //     }
 // }
-
-// console.log(typeof window.location.pathname);
-// window.onload = () => {
-//     const login = document.getElementById("login-container");
-//     const reg = document.getElementById("register-container");
-//     if (window.location.pathname === "/login/") {
-//         console.log("login!");
-//         login.classList.remove("hidden");
-//         if (!reg.classList.contains("hidden")) {
-//             reg.classList.toggle("hidden");
-//         }
-//     }
-//     else if (window.location.pathname === "/register/") {
-//         console.log("register!");
-//         reg.classList.remove("hidden");
-//         if (!login.classList.contains("hidden")) {
-//             login.classList.toggle("hidden");
-//         }
-//     }
-// }
-

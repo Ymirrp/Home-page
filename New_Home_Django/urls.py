@@ -5,6 +5,7 @@ from home_app import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('home/', views.home, name='home'),
+    path('weather/', views.get_weather_view, name='weather'),
     path('out/<path:url>', views.reroute, name='topsites-url'),
     path('add-site/', views.add_site, name='add-site'),
     path('edit/<int:s_id>', views.edit_site, name='edit-site'),

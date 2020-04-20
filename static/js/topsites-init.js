@@ -27,9 +27,7 @@ $(document).ready(() => {
     let weekd = date.getUTCDay();
     let day = date.getUTCDate().toString();
     let month = date.getUTCMonth();
-    // let year = date.getUTCFullYear().toString();
     let fulldate = weekdays[weekd] + ", " + day + ". " + months[month]/* + " '" + year.slice(2, year.length)*/;
-    // console.log(fulldate);
     $("#date").text(fulldate);
 
     let btn_id = $(".btn").first().attr('id').toString();
@@ -46,20 +44,8 @@ $(document).ready(() => {
         }
     }
 
-    // let modal = '<div class="delete-wrapper" id="delbox-"' + s_id + '>' +
-    //     '<span>Ertu viss að þú viljir eyða þessa síðu?</span>' +
-    //     '<input type="submit" value="Eyða">' +
-    //     '<button onclick="close_del(' + s_id + ')">Hætta við</button>' +
-    //     '</div>';
-    // $("#delete-confirmation").innerHTML = modal;
-    // $("#delete-confirmation").html('<div class="delete-wrapper" id="delbox-"' + s_id + '>' +
-    //     '<span>Ertu viss að þú viljir eyða þessa síðu?</span>' +
-    //     '<input type="submit" value="Eyða">' +
-    //     '<button onclick="close_del(' + s_id + ')">Hætta við</button>' +
-    //     '</div>');
     $(".site-title").each(function() {
         let title_len = $(this).text().length;
-        // console.log($(this).text() + ": " + title_len);
         if (title_len > 20 && title_len <= 48) {
             $(this).css("font-size", "1em");
             $(this).css("margin-top", "0.65em");
@@ -69,4 +55,29 @@ $(document).ready(() => {
             $(this).css("margin-top", "0.8em");
         }
     });
+    function getWeather() {
+        if (!navigator.geolocation) {
+            console.log("No support");
+        } else {
+            navigator.geolocation.getCurrentPosition((location) => {
+                console.log(`Lat: ${location.coords.latitude}, Lon: ${location.coords.longitude}`);
+                $.ajax({
+                    url: '/weather/',
+                    method: 'GET',
+                    data: 'lat='+location.coords.latitude+'&lon='+location.coords.longitude,
+                    success: (res) => {
+                        console.log(res);
+                        $("#weather").html(
+                            `<span id="w-temp">${res.temp}&deg;</span>` +
+                            `<span id="w-weather">${res.weather}</span>` +
+                            `<img id="w-icon" src="${res.icon}">` +
+                            `<span id="w-wind">${res.wind}m/s ${res.deg}</span>` +
+                            // `<span id="w-deg">${res.deg}</span>` +
+                            `<span id="w-city">@${res.city}</span>`
+                        )
+                }})
+            })
+        }
+    }
+    getWeather();
 });

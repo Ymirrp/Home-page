@@ -2,12 +2,13 @@
 function expand_nav() {
     let i;
     let navbar = document.getElementById('navbar');
+    let menu_btn = document.getElementById("menu-btn");
     let btns = document.querySelector('.nav-btns');
     let txts = document.getElementsByClassName('menu-txt');
 
     if (navbar.className.search("expand") === -1) {
-        console.log("expanding...");
         navbar.style.textAlign = 'left';
+        menu_btn.classList.replace("fa-bars", "fa-times");
         navbar.classList.toggle("expand");
         setTimeout(() => {
             for (i=0; i<txts.length; i++) {
@@ -17,8 +18,8 @@ function expand_nav() {
 
     }
     else {
-        console.log("closing...");
         setTimeout(() => {
+            menu_btn.classList.replace("fa-times", "fa-bars");
             navbar.classList.toggle("expand");
             navbar.style.textAlign = 'center';
         }, 100);

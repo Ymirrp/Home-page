@@ -1,5 +1,6 @@
 import feedparser
 import operator
+import requests
 from datetime import datetime, timedelta
 
 
@@ -81,3 +82,72 @@ def parse_date(site, entry):
         else:
             entry['time_passed'] = str(s) + " sekúndum síðan"
     return entry
+
+
+def get_weather(lat, lon):
+    api_url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + \
+              "&lon=" + lon + "&units=metric&appid=c5d83ac177a5989b9d9ee9f886892237"
+    print(api_url)
+    res = requests.get(api_url)
+    return parse_weather(res.json())
+
+
+def parse_weather(w):
+    translation = {
+        "Thunderstorm": "Þrumuveður",
+        "Drizzle": "Skúrir",
+        "Rain": "Rigning",
+        "Snow": "Snjókoma",
+        "Clear": "Heiðskýrt",
+        "Clouds": "Skýjað"
+    }
+    city = w['name']
+    weather = translation[w['weather'][0]['main']]
+    wind = w['wind']['speed']
+    temp = int(round(w['main']['temp'], 0))
+    degree = get_degree(int(w['wind']['deg']))
+    present = datetime.now()
+    time_diff = present - timedelta(seconds=w['dt'])
+    time = time_diff.minute
+    img = "http://openweathermap.org/img/wn/" + w['weather'][0]['icon'] + '.png'
+    return {
+        "city": city,
+        "weather": weather,
+        "temp": temp,
+        "wind": wind,
+        "deg": degree,
+        "time": time,
+        "icon": img
+    }
+
+
+def get_degree(deg):
+    ret = ''
+    if deg != 0:
+        deg = deg / 32
+    if deg < 3 or deg >= 31:
+        # ret = 'N'
+        ret = '&#8593'
+    elif 3 <= deg < 8:
+        # ret = 'N/A'
+        ret = '&#8599'
+    elif 8 <= deg < 11:
+        # ret = 'A'
+        ret = '&#8594'
+    elif 11 <= deg < 16:
+        # ret = 'S/A'
+        ret = '&#8600'
+    elif 16 <= deg < 19:
+        # ret = 'S'
+        ret = '&#8595'
+    elif 19 <= deg < 24:
+        # ret = 'S/V'
+        ret = '&#8601'
+    elif 24 <= deg < 27:
+        # ret = 'V'
+        ret = '&#8592'
+    elif 27 <= deg < 30:
+        # ret = 'N/V'
+        ret = '&#8598'
+    return ret
+
