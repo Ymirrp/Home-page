@@ -11,3 +11,4 @@ Fleiri þjónustur eru á leiðinni, þ.m.t. verkefnalista (e. todo list) sem ve
 Athugið að síðan er ekki fullkláruð og er einungis í útgáfu 0.1 (e. v0.1) eins og er.
 
 ![Screenshot_v0](/Screenshot_v0.png)
+![Screenshot_v0_2](/Screenshot_v0_2.png)
