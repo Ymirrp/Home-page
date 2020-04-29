@@ -65,10 +65,15 @@
 /*    text-align: left;*/
 /*}*/
 #w-city {
-    grid-column: 3;
-    grid-row: 3;
+    /*grid-column: 3;*/
+    /*grid-row: 3;*/
+    /*font: inherit;*/
     font-style: italic;
     /*text-align: right;*/
+}
+#location {
+    grid-column: 3;
+    grid-row: 3;
 }
 
 #hello-name, #date {

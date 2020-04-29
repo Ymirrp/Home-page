@@ -193,6 +193,9 @@
     <div id="snackbar"></div>
 {% endblock %}
 {% block news %}
+    <div id="news-banner" class="far fa-newspaper">
+        <span>FRÉTTIR</span>
+    </div>
     <div id="news-container">
         {% for entry in feeds %}
             <a href="{{ entry.id }}">

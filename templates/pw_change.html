@@ -1,0 +1,27 @@
+{% extends 'profile.html' %}
+{% load static %}
+{% block profile %}
+    <h1>Endurstilla lykilorð</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label>Gamla lykilorðið:</label>
+        {{ form.old_password }}
+        <label>Nýja lykilorðið:</label>
+        {{ form.new_password1 }}
+        <label>Endurtaktu nýja lykilorðið:</label>
+        {{ form.new_password2 }}
+        <input type="submit" value="Endurnýja">
+    </form>
+    <a id="to-profile" href="{% url 'profile' %}"><button>Til baka</button></a>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>&#10003; {{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% elif errors %}
+            <ul>
+                <li id="pw-change-error" style="color: red">Lykilorðin stemma ekki!</li>
+            </ul>
+        {% endif %}
+{% endblock %}

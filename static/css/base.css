@@ -71,6 +71,11 @@ body {
     background-color: #d4d5dd;
 }
 
+#profile-btn span {
+    font-size: .56em;
+    margin-top: .253em;
+}
+
 #logout-btn {
     position: fixed;
     /*width: initial;*/
@@ -109,7 +114,7 @@ main {
     margin-right: 0;
     height: 96vh;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 .hidden {

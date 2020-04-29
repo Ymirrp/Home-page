@@ -25,7 +25,8 @@ def reroute(req, url):
 
 
 def user_login(req):
-    print(req.POST)
+    if req.user.is_authenticated:
+        return redirect('home')
     if req.method == 'POST':
         if '@' in req.POST['uname']:
             email = req.POST['uname']

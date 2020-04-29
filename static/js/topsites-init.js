@@ -73,7 +73,7 @@ $(document).ready(() => {
                             `<img id="w-icon" src="${res.icon}">` +
                             `<span id="w-wind">${res.wind}m/s ${res.deg}</span>` +
                             // `<span id="w-deg">${res.deg}</span>` +
-                            `<span id="w-city">@${res.city}</span>`
+                            `<span id="location">&#128205; <span id="w-city">${res.city}</span></span>`
                         )
                 }})
             })
