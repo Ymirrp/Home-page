@@ -1,13 +1,14 @@
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import forms
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from news_app import views as n_views
 from .models import TopSites as TP
 from .forms import AddSiteForm, RegisterUserForm
 from .feeds import *
+import requests
 
 
 def index(req):
@@ -24,7 +25,8 @@ def reroute(req, url):
 
 
 def user_login(req):
-    print(req.POST)
+    if req.user.is_authenticated:
+        return redirect('home')
     if req.method == 'POST':
         if '@' in req.POST['uname']:
             email = req.POST['uname']
@@ -141,7 +143,16 @@ def edit_site(req, s_id):
 def del_site(req, s_id):
     if req.user.is_authenticated:
         TP.objects.get(id=s_id).delete()
-    return redirect('home')
+        return HttpResponse("Site " + str(s_id) + " deleted")
+    return HttpResponse("Error: User not logged in!")
+    # return redirect('home')
+
+
+def get_weather_view(req):
+    lat = req.GET.get('lat')
+    lon = req.GET.get('lon')
+    res = get_weather(lat, lon)
+    return JsonResponse(res)
 
 
 def unavailable(req):

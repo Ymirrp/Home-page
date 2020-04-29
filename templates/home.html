@@ -9,8 +9,11 @@
     <script src="{% static 'js/functions.js' %}"></script>
 {% endblock %}
 {% block topsites %}
-    <div id="date-container">
-        <p id="hello-name">Halló, {{ user }}</p>
+    <div id="weather">
+        <div id="loader"></div>
+    </div>
+    <div id="welc-container">
+        <p id="hello-name">Velkomin/nn, {{ user }}</p>
         <p id="date"></p>
     </div>
     <div id="topsites-container">
@@ -190,6 +193,9 @@
     <div id="snackbar"></div>
 {% endblock %}
 {% block news %}
+    <div id="news-banner" class="far fa-newspaper">
+        <span>FRÉTTIR</span>
+    </div>
     <div id="news-container">
         {% for entry in feeds %}
             <a href="{{ entry.id }}">

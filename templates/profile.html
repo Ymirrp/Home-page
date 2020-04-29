@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block main %}
+    <div id="content">
+        <div id="update-user-container">
+            {% block profile %}
+                <h1>Á að breyta til, {{ user.first_name }}?</h1>
+                <form action="{% url 'profile' %}" method="POST">
+                    {% csrf_token %}
+
+                    <label for="email-inp">Netfang:</label>
+                    {{ form.email }}
+                    <label for="f_name-inp">Fornafn:</label>
+                    {{ form.first_name }}
+                    <label for="l_name-inp">Eftirnafn / Föðurnafn:</label>
+                    {{ form.last_name }}
+                        <input type="submit" class="btn" value="Vista">
+                </form>
+                <a id="reset-pw" href="{% url 'password_change' %}"><button>Breyta lykilorði</button></a>
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                <li>&#10003; {{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

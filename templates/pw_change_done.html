@@ -1,0 +1,8 @@
+{% extends 'profile.html' %}
+{% load static %}
+{% block profile %}
+    <h1>Endurstilla lykilorð</h1>
+    <p class="done_p">Þú hefur endurstillt lykilorðið.</p>
+    <p class="done_p">Ýtti á hnappinn fyrir neðan til að skrá aftur inn.</p>
+    <a id="to-login" href="{% url 'logout' %}"><button>Skrá inn</button></a>
+{% endblock %}

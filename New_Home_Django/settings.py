@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home_app.apps.HomeAppConfig',
-    'news_app.apps.NewsAppConfig',
     'todo_app.apps.TodoAppConfig',
+    # 'user_config_app.apps.UserConfigConfig',
 ]
 
 MIDDLEWARE = [
@@ -107,6 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -130,4 +131,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-LOGIN_URL = 'index'
+LOGIN_URL = 'login'
